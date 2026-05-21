@@ -17,8 +17,7 @@ export default function Layout() {
           <div className="flex items-center gap-2">
             <span className="text-2xl">🚇</span>
             <div>
-              <p className="text-white font-bold text-sm leading-tight">Tunnel Manager</p>
-              <p className="text-slate-400 text-xs">Túnel Yébenes</p>
+              <p className="text-white font-bold text-sm leading-tight">Soterramiento A5</p>
             </div>
           </div>
         </div>
