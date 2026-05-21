@@ -25,11 +25,14 @@ export default function Dashboard() {
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
-    // Parallel fetch
     Promise.all([
       activitiesApi.getSummary(),
       activitiesApi.getAll(),
-    ]).then(([s, a]) => { setStats(s); setActivities(a); });
+    ]).then(([s, a]) => { setStats(s); setActivities(a); })
+      .catch(() => {
+        setStats({ total: 0, completed: 0, in_progress: 0, delayed: 0, pending: 0, avg_progress: 0, delayed_list: [], upcoming: [] });
+        setActivities([]);
+      });
   }, []);
 
   if (!stats) return <DashboardSkeleton />;
