@@ -1,24 +1,31 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
 import Layout from './components/Layout';
-import PageLoader, { DashboardSkeleton, GanttSkeleton, TableSkeleton, ReportsSkeleton } from './components/PageLoader';
-
-const Dashboard    = lazy(() => import('./pages/Dashboard'));
-const GanttPage    = lazy(() => import('./pages/GanttPage'));
-const ActivityPage = lazy(() => import('./pages/ActivityPage'));
-const BudgetPage   = lazy(() => import('./pages/BudgetPage'));
-const ReportsPage  = lazy(() => import('./pages/ReportsPage'));
+import Dashboard    from './pages/Dashboard';
+import GanttPage    from './pages/GanttPage';
+import ActivityPage from './pages/ActivityPage';
+import BudgetPage   from './pages/BudgetPage';
+import ReportsPage  from './pages/ReportsPage';
+import PlanosPage   from './pages/PlanosPage';
+import CalidadPage  from './pages/CalidadPage';
+import MaquinariaPage from './pages/MaquinariaPage';
+import SeguridadPage  from './pages/SeguridadPage';
+import IAProPage    from './pages/IAProPage';
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index             element={<Suspense fallback={<DashboardSkeleton />}><Dashboard /></Suspense>} />
-          <Route path="gantt"      element={<Suspense fallback={<GanttSkeleton />}><GanttPage /></Suspense>} />
-          <Route path="actividad"  element={<Suspense fallback={<TableSkeleton />}><ActivityPage /></Suspense>} />
-          <Route path="presupuestos" element={<Suspense fallback={<PageLoader />}><BudgetPage /></Suspense>} />
-          <Route path="informes"   element={<Suspense fallback={<ReportsSkeleton />}><ReportsPage /></Suspense>} />
+          <Route index               element={<Dashboard />} />
+          <Route path="gantt"        element={<GanttPage />} />
+          <Route path="actividad"    element={<ActivityPage />} />
+          <Route path="presupuestos" element={<BudgetPage />} />
+          <Route path="informes"     element={<ReportsPage />} />
+          <Route path="planos"       element={<PlanosPage />} />
+          <Route path="calidad"      element={<CalidadPage />} />
+          <Route path="maquinaria"   element={<MaquinariaPage />} />
+          <Route path="seguridad"    element={<SeguridadPage />} />
+          <Route path="ia-avanzada"  element={<IAProPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -132,24 +132,74 @@ const INITIAL_PRICE_HISTORY = [
   { id: 8, material_id: 6,  price: 95.00,  date: '2025-02-15', note: 'Revisión contrato Sika' },
 ];
 
-// Always seed; force-replace collections that need updating
-db.defaults({
-  activities: INITIAL_ACTIVITIES,
-  materials: [],
-  daily_reports: [],
-  weekly_reports: [],
-  users: [],
-}).write();
+// ── NUEVOS MÓDULOS ────────────────────────────────────────────────────────────
 
-// Force-seed budget collections every start (idempotent by overwriting)
-db.set('catalog', FULL_CATALOG).write();
-db.set('suppliers', INITIAL_SUPPLIERS).write();
-db.set('budget_items', INITIAL_BUDGET_ITEMS).write();
-db.set('material_prices_history', INITIAL_PRICE_HISTORY).write();
-db.set('_nextId', {
-  activities: 10, materials: 1, daily_reports: 1, weekly_reports: 1,
-  catalog: 41, suppliers: 9, budget_items: 30, price_history: 9
-}).write();
+const INITIAL_QUALITY_TESTS = [
+  { id: 1, activity_id: 1, type: 'Compactación Proctor', date: '2026-04-08', pk: '1+900', result: 98.2, min_value: 95, unit: '%',      status: 'ok',  technician: 'Luis M.',   observations: '' },
+  { id: 2, activity_id: 1, type: 'Granulometría zahorra', date: '2026-04-10', pk: '1+850', result: 100, min_value: 100, unit: 'conforme', status: 'ok',  technician: 'Luis M.',   observations: 'Curva dentro de huso' },
+  { id: 3, activity_id: 2, type: 'Rotura probeta gunita 7d', date: '2026-04-14', pk: '1+880', result: 22.4, min_value: 25, unit: 'N/mm²', status: 'nok', technician: 'Ana P.',    observations: 'No cumple resistencia mínima. Revisión dosificación' },
+  { id: 4, activity_id: 2, type: 'Rotura probeta gunita 28d', date: '2026-04-20', pk: '1+880', result: 31.8, min_value: 25, unit: 'N/mm²', status: 'ok', technician: 'Ana P.',   observations: 'Resistencia final correcta' },
+  { id: 5, activity_id: 2, type: 'Espesor gunitado', date: '2026-04-18', pk: '1+860', result: 11.2, min_value: 10, unit: 'cm',      status: 'ok',  technician: 'Ana P.',    observations: '' },
+  { id: 6, activity_id: 1, type: 'Rotura probeta HA-30 7d',  date: '2026-04-22', pk: '1+810', result: 28.5, min_value: 25, unit: 'N/mm²', status: 'ok', technician: 'Luis M.',  observations: '' },
+  { id: 7, activity_id: 1, type: 'Rotura probeta HA-30 28d', date: '2026-05-06', pk: '1+810', result: 34.2, min_value: 30, unit: 'N/mm²', status: 'ok', technician: 'Luis M.',  observations: '' },
+  { id: 8, activity_id: 9, type: 'Hincado puesta tierra',     date: '2026-04-12', pk: '1+770', result: 3.2,  min_value: 5,  unit: 'Ω',    status: 'nok', technician: 'Carlos R.', observations: 'Resistividad elevada. Ampliar red de tierra' },
+];
+
+const INITIAL_MACHINERY = [
+  { id: 1, date: '2026-04-01', machine: 'Excavadora CAT 336', plate: 'CAT-336-01', operator: 'Miguel A.', hours: 8.5, fuel_liters: 98,  activity_id: 1, status: 'ok',       observations: '' },
+  { id: 2, date: '2026-04-01', machine: 'Volquete Volvo A40', plate: 'VO-40-01',   operator: 'Pedro S.',  hours: 9.0, fuel_liters: 125, activity_id: 1, status: 'ok',       observations: '' },
+  { id: 3, date: '2026-04-02', machine: 'Excavadora CAT 336', plate: 'CAT-336-01', operator: 'Miguel A.', hours: 7.0, fuel_liters: 82,  activity_id: 1, status: 'avería',   observations: 'Fallo hidráulico brazo. Parada 2h para reparación' },
+  { id: 4, date: '2026-04-03', machine: 'Excavadora CAT 336', plate: 'CAT-336-01', operator: 'Miguel A.', hours: 8.5, fuel_liters: 96,  activity_id: 1, status: 'ok',       observations: '' },
+  { id: 5, date: '2026-04-10', machine: 'Bomba gunita Putzmeister', plate: 'PUT-01', operator: 'Raúl G.',  hours: 7.5, fuel_liters: 45,  activity_id: 2, status: 'ok',       observations: '' },
+  { id: 6, date: '2026-04-11', machine: 'Bomba gunita Putzmeister', plate: 'PUT-01', operator: 'Raúl G.',  hours: 8.0, fuel_liters: 48,  activity_id: 2, status: 'ok',       observations: '' },
+  { id: 7, date: '2026-04-12', machine: 'Bomba gunita Putzmeister', plate: 'PUT-01', operator: 'Raúl G.',  hours: 5.0, fuel_liters: 30,  activity_id: 2, status: 'avería',   observations: 'Obstrucción en línea. Limpieza y reinicio' },
+  { id: 8, date: '2026-04-05', machine: 'Camión grúa 30T',   plate: 'GRU-30-01',  operator: 'Javier M.', hours: 4.0, fuel_liters: 60,  activity_id: 9, status: 'ok',       observations: '' },
+  { id: 9, date: '2026-04-15', machine: 'Excavadora CAT 336', plate: 'CAT-336-01', operator: 'Miguel A.', hours: 8.0, fuel_liters: 91,  activity_id: 1, status: 'ok',       observations: '' },
+  { id:10, date: '2026-04-16', machine: 'Volquete Volvo A40', plate: 'VO-40-01',   operator: 'Pedro S.',  hours: 9.5, fuel_liters: 132, activity_id: 1, status: 'ok',       observations: '' },
+];
+
+const INITIAL_SAFETY = [
+  { id: 1, date: '2026-04-03', type: 'casi-accidente', severity: 'medium', location: 'PK 1+900 Frente excavación', description: 'Caída de bloque suelto desde hastial durante excavación. Operario en zona sin casco.', injured: false, corrective: 'Refuerzo de señalización. Charla de seguridad a toda la plantilla. Revisión diaria de hastiales.', status: 'cerrada' },
+  { id: 2, date: '2026-04-07', type: 'inspección',    severity: 'low',    location: 'Toda la obra',               description: 'Inspección rutinaria del coordinador de seguridad. 3 no conformidades menores detectadas.', injured: false, corrective: 'Corrección de señalización, orden y limpieza en zona de acopio.', status: 'cerrada' },
+  { id: 3, date: '2026-04-15', type: 'casi-accidente', severity: 'high',  location: 'PK 1+870 Zona gunitado',     description: 'Proyección de hormigón sobre operario sin gafas de protección. Sin lesión por reacción rápida.', injured: false, corrective: 'Obligatorio uso de gafas en zona de proyección. Revisión EPIs de todo el personal.', status: 'cerrada' },
+  { id: 4, date: '2026-04-20', type: 'inspección',    severity: 'low',    location: 'Instalaciones eléctricas',   description: 'Revisión cuadros eléctricos provisionales. Todo conforme.', injured: false, corrective: 'Sin acciones requeridas.', status: 'cerrada' },
+  { id: 5, date: '2026-05-02', type: 'accidente',     severity: 'medium', location: 'PK 1+820 Zona ferralla',     description: 'Corte en mano derecha durante manipulación de ferralla sin guantes adecuados. Herida leve, curada en botiquín.', injured: true, corrective: 'Revisión obligatoria guantes de corte nivel 4. Parte de accidente presentado.', status: 'abierta' },
+];
+
+const INITIAL_DOCS = [
+  { id: 1, name: 'Plano Planta General PK 1+675 a 1+940', type: 'plano', category: 'topografía', activity_id: null, date: '2026-03-15', size: '2.4 MB', format: 'PDF', uploaded_by: 'Jefe de obra', path: null },
+  { id: 2, name: 'Plano Sección Transversal Tipo Túnel',   type: 'plano', category: 'estructura',  activity_id: 1,    date: '2026-03-15', size: '1.8 MB', format: 'PDF', uploaded_by: 'Jefe de obra', path: null },
+  { id: 3, name: 'Plano Armado Losa Inferior',             type: 'plano', category: 'estructura',  activity_id: 4,    date: '2026-03-20', size: '3.1 MB', format: 'PDF', uploaded_by: 'Jefe de obra', path: null },
+  { id: 4, name: 'Plano Drenaje Longitudinal',             type: 'plano', category: 'drenaje',     activity_id: 3,    date: '2026-03-18', size: '1.2 MB', format: 'PDF', uploaded_by: 'Jefe de obra', path: null },
+  { id: 5, name: 'Plan de Seguridad y Salud',              type: 'documento', category: 'seguridad', activity_id: null, date: '2026-02-28', size: '4.5 MB', format: 'PDF', uploaded_by: 'Coordinador SS', path: null },
+  { id: 6, name: 'Control de Calidad — Hormigones',        type: 'documento', category: 'calidad',   activity_id: null, date: '2026-03-01', size: '0.8 MB', format: 'PDF', uploaded_by: 'Lab. externo', path: null },
+  { id: 7, name: 'Proyecto Eléctrico Reposición 1+770',    type: 'plano', category: 'instalaciones', activity_id: 9,   date: '2026-03-25', size: '2.0 MB', format: 'PDF', uploaded_by: 'Jefe de obra', path: null },
+];
+
+// ── Seed only on first run (version check = zero writes on subsequent starts) ─
+const SEED_VERSION = 2;
+if (db.get('_seedVersion').value() !== SEED_VERSION) {
+  db.set('activities',              INITIAL_ACTIVITIES)
+    .set('materials',               [])
+    .set('daily_reports',           [])
+    .set('weekly_reports',          [])
+    .set('users',                   [])
+    .set('catalog',                 FULL_CATALOG)
+    .set('suppliers',               INITIAL_SUPPLIERS)
+    .set('budget_items',            INITIAL_BUDGET_ITEMS)
+    .set('material_prices_history', INITIAL_PRICE_HISTORY)
+    .set('quality_tests',           INITIAL_QUALITY_TESTS)
+    .set('machinery_logs',          INITIAL_MACHINERY)
+    .set('safety_incidents',        INITIAL_SAFETY)
+    .set('documents',               INITIAL_DOCS)
+    .set('_nextId', {
+      activities: 10, materials: 1, daily_reports: 1, weekly_reports: 1,
+      catalog: 41, suppliers: 9, budget_items: 30, price_history: 9,
+      quality_tests: 9, machinery_logs: 11, safety_incidents: 6, documents: 8
+    })
+    .set('_seedVersion', SEED_VERSION)
+    .write(); // ONE write — only on first start
+}
 
 db.nextId = function(collection) {
   const current = db.get(`_nextId.${collection}`).value();

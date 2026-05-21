@@ -5,8 +5,17 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    proxy: {
-      '/api': 'http://localhost:3001'
+    proxy: { '/api': 'http://localhost:3001' }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor':   ['react', 'react-dom', 'react-router-dom', 'axios'],
+          'charts':   ['recharts'],
+          'pdf':      ['jspdf', 'jspdf-autotable'],
+        }
+      }
     }
   }
 });
