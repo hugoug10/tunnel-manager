@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { @apply text-slate-800 antialiased; }
+}
+
+@layer components {
+  .card { @apply bg-white rounded-xl shadow-sm border border-slate-200 p-5; }
+  .btn-primary { @apply bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors; }
+  .btn-secondary { @apply bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors; }
+  .badge { @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium; }
+}
+
+/* Gantt custom styles */
+.gantt-container {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.gantt-grid {
+  display: grid;
+  min-width: max-content;
+}
+
+.gantt-bar-completed { background: #22c55e; }
+.gantt-bar-in_progress { background: #3b82f6; }
+.gantt-bar-delayed { background: #ef4444; }
+.gantt-bar-pending { background: #94a3b8; }
+
+.status-completed { @apply badge bg-green-100 text-green-700; }
+.status-in_progress { @apply badge bg-blue-100 text-blue-700; }
+.status-delayed { @apply badge bg-red-100 text-red-700; }
+.status-pending { @apply badge bg-slate-100 text-slate-600; }
