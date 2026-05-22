@@ -60,7 +60,7 @@ export default function GanttPage() {
   if (loading) return <GanttSkeleton />;
 
   return (
-    <div className="p-6 h-full flex flex-col">
+    <div className="p-4 md:p-6 h-full flex flex-col">
       <div className="flex items-center justify-between mb-4 shrink-0">
         <div>
           <h1 className="text-2xl font-bold text-slate-900">Diagrama de Gantt</h1>

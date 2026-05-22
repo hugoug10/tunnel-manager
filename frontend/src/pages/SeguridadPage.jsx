@@ -50,7 +50,7 @@ export default function SeguridadPage() {
   const INSIGHT_STYLES = { pattern: 'bg-blue-50 border-blue-200 text-blue-800', alert: 'bg-red-50 border-red-200 text-red-800', pending: 'bg-amber-50 border-amber-200 text-amber-800', kpi: 'bg-slate-50 border-slate-200 text-slate-700' };
 
   return (
-    <div className="p-6 space-y-5 overflow-auto">
+    <div className="p-4 md:p-6 space-y-5 overflow-auto">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>

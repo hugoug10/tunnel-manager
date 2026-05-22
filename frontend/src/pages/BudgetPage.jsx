@@ -587,7 +587,7 @@ export default function BudgetPage() {
   );
 
   return (
-    <div className="p-6 space-y-5 overflow-auto">
+    <div className="p-4 md:p-6 space-y-5 overflow-auto">
       <div>
         <h1 className="text-2xl font-bold text-slate-900">Presupuestos</h1>
         <p className="text-slate-500 text-sm">
@@ -595,7 +595,7 @@ export default function BudgetPage() {
         </p>
       </div>
 
-      <div className="flex gap-1 border-b border-slate-200">
+      <div className="flex gap-1 border-b border-slate-200 overflow-x-auto">
         {TABS.map(t => (
           <button key={t.id} onClick={() => setTab(t.id)}
             className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${

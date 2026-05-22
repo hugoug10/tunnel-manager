@@ -115,13 +115,13 @@ export default function ActivityPage() {
   const filtered = filter === 'all' ? activities : activities.filter(a => a.status === filter);
 
   return (
-    <div className="p-6 space-y-5">
-      <div className="flex items-center justify-between">
+    <div className="p-4 md:p-6 space-y-5">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-slate-900">Gestión de Actividades</h1>
           <p className="text-slate-500 text-sm">Actualiza el estado y producción real de cada tarea</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           {['all', 'in_progress', 'delayed', 'pending', 'completed'].map(f => (
             <button key={f} onClick={() => setFilter(f)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${filter === f ? 'bg-blue-700 text-white' : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'}`}>

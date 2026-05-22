@@ -41,7 +41,7 @@ export default function MaquinariaPage() {
   }
 
   return (
-    <div className="p-6 space-y-5 overflow-auto">
+    <div className="p-4 md:p-6 space-y-5 overflow-auto">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -176,8 +176,8 @@ export default function MaquinariaPage() {
       </div>
 
       {/* Table */}
-      <div className="card overflow-hidden p-0">
-        <table className="w-full text-sm">
+      <div className="card overflow-x-auto p-0">
+        <table className="w-full text-sm min-w-[600px]">
           <thead className="bg-slate-50 border-b border-slate-200">
             <tr>
               {['Fecha','Máquina','Operador','Horas','Comb. (L)','Estado','Notas',''].map(h => (

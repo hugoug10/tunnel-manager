@@ -252,7 +252,7 @@ export default function ReportsPage() {
   const [tab, setTab] = useState('daily');
 
   return (
-    <div className="p-6 space-y-5">
+    <div className="p-4 md:p-6 space-y-5">
       <div>
         <h1 className="text-2xl font-bold text-slate-900">Informes</h1>
         <p className="text-slate-500 text-sm">Diario manual + análisis semanal con IA</p>

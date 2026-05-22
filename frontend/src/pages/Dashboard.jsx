@@ -50,7 +50,7 @@ export default function Dashboard() {
   }));
 
   return (
-    <div className="p-6 space-y-6 overflow-auto">
+    <div className="p-4 md:p-6 space-y-5 overflow-auto">
       <div>
         <h1 className="text-2xl font-bold text-slate-900">Dashboard — Túnel Yébenes</h1>
         <p className="text-slate-500 text-sm mt-1">Resumen en tiempo real</p>
