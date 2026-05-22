@@ -9,7 +9,8 @@ import PlanosPage   from './pages/PlanosPage';
 import CalidadPage  from './pages/CalidadPage';
 import MaquinariaPage from './pages/MaquinariaPage';
 import SeguridadPage  from './pages/SeguridadPage';
-import IAProPage    from './pages/IAProPage';
+import IAProPage       from './pages/IAProPage';
+import BibliografiaPage from './pages/BibliografiaPage';
 
 export default function App() {
   return (
@@ -25,7 +26,8 @@ export default function App() {
           <Route path="calidad"      element={<CalidadPage />} />
           <Route path="maquinaria"   element={<MaquinariaPage />} />
           <Route path="seguridad"    element={<SeguridadPage />} />
-          <Route path="ia-avanzada"  element={<IAProPage />} />
+          <Route path="ia-avanzada"   element={<IAProPage />} />
+          <Route path="bibliografia"  element={<BibliografiaPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

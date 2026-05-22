@@ -26,6 +26,12 @@ const SECTIONS = [
     items: [
       { to: '/ia-avanzada', label: 'IA Avanzada', icon: '🤖' },
     ]
+  },
+  {
+    label: 'Documentación',
+    items: [
+      { to: '/bibliografia', label: 'Bibliografía', icon: '📚' },
+    ]
   }
 ];
 
