@@ -125,44 +125,6 @@ const tieneAlerta = tasaAverias > 20;`}
 }`}
       />
 
-      <Block
-        icon="🔒" title="Protección con contraseña"
-        description="Al entrar a la web, el servidor comprueba si el usuario ya se identificó. Si no, le manda a la pantalla de login. Al acertar la contraseña, se guarda una cookie que dura 7 días."
-        code={`// Si la contraseña es correcta → guarda una cookie de 7 días
-if (contraseña === CLAVE_CORRECTA) {
-  res.cookie('sesion', 'ok', { maxAge: 7 * 24 * 60 * 60 * 1000 });
-  res.redirect('/');
-}
-
-// En cada página: si no hay cookie → redirige al login
-if (!req.cookies.sesion) res.redirect('/login');`}
-      />
-
-      <Block
-        icon="🗄️" title="Datos — Cómo se guardan"
-        description="Todos los datos se guardan en un archivo de texto en el servidor. No hace falta instalar ninguna base de datos externa, todo está en un solo archivo JSON."
-        code={`// Estructura del archivo donde se guardan todos los datos
-{
-  "actividades":  [ { id: 1, nombre: '...', estado: 'en curso' } ],
-  "partes":       [ { fecha: '2026-05-21', personal: 12 } ],
-  "ensayos":      [ { tipo: 'hormigón', resultado: 28.5 } ],
-  "maquinaria":   [ { maquina: 'Excavadora', horas: 8 } ],
-  "incidencias":  [ { tipo: 'casi-accidente', estado: 'abierta' } ]
-}`}
-      />
-
-      <Block
-        icon="🚀" title="Publicación en internet"
-        description="La aplicación está publicada en Railway. Cada vez que se sube un cambio a GitHub, Railway lo detecta y actualiza la web automáticamente en pocos minutos."
-        code={`// Dos pasos para poner la app en marcha en el servidor:
-{
-  "build": "cd frontend && npm install && npm run build",
-  "start": "node backend/server.js"
-}
-// 1. build → prepara los archivos del navegador
-// 2. start → arranca el servidor que sirve todo`}
-      />
-
       <div className="text-center text-slate-300 text-xs pt-6 border-t border-slate-100 mt-4">
         Gestor de Obra — Soterramiento A5 · TFG
       </div>
