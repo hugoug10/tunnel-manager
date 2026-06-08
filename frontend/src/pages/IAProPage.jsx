@@ -40,8 +40,8 @@ function PrediccionTab() {
       </div>
 
       {/* Predictions table */}
-      <div className="card overflow-hidden p-0">
-        <table className="w-full text-sm">
+      <div className="card overflow-x-auto p-0">
+        <table className="w-full text-sm min-w-[700px]">
           <thead className="bg-slate-50 border-b border-slate-200">
             <tr>
               {['Actividad','Estado','Progreso','Fin planificado','Fin previsto IA','Desviación','Riesgo'].map(h => (

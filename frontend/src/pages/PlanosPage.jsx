@@ -44,12 +44,12 @@ export default function PlanosPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-5 overflow-auto">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-slate-900">Planos y Documentación</h1>
           <p className="text-slate-500 text-sm">{docs.length} documentos · Gestión documental de obra</p>
         </div>
-        <button onClick={() => setShowForm(s => !s)} className="btn-primary">
+        <button onClick={() => setShowForm(s => !s)} className="btn-primary self-start sm:self-auto">
           + Subir documento
         </button>
       </div>

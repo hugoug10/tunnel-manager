@@ -188,7 +188,7 @@ function WeeklyReport() {
       {analysis && (
         <div className="space-y-4">
           {/* Summary */}
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { label: 'Total actividades', value: analysis.summary.total_activities, color: 'text-slate-700' },
               { label: 'Completadas', value: analysis.summary.completed, color: 'text-green-600' },

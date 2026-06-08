@@ -52,12 +52,12 @@ export default function SeguridadPage() {
   return (
     <div className="p-4 md:p-6 space-y-5 overflow-auto">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-slate-900">Seguridad y Salud</h1>
           <p className="text-slate-500 text-sm">{incidents.length} incidencias · Plan de seguridad obra</p>
         </div>
-        <button onClick={() => setShowForm(s => !s)} className="btn-primary">+ Registrar incidencia</button>
+        <button onClick={() => setShowForm(s => !s)} className="btn-primary self-start sm:self-auto">+ Registrar incidencia</button>
       </div>
 
       {/* KPIs */}
