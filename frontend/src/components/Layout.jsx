@@ -41,7 +41,7 @@ function SidebarContent({ onClose }) {
       <div className="px-5 py-5 border-b border-slate-700 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="text-2xl">🚇</span>
-          <p className="text-white font-bold text-sm leading-tight">Soterramiento A5</p>
+          <p className="text-white font-bold text-sm leading-tight">JCGR CIVIL SYSTEMS</p>
         </div>
         {onClose && (
           <button onClick={onClose} className="text-slate-400 hover:text-white md:hidden p-1">
@@ -124,7 +124,7 @@ export default function Layout() {
             </svg>
           </button>
           <span className="text-xl">🚇</span>
-          <span className="text-white font-bold text-sm">Soterramiento A5</span>
+          <span className="text-white font-bold text-sm">JCGR CIVIL SYSTEMS</span>
         </header>
 
         <main className="flex-1 overflow-auto">

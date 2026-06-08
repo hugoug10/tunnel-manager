@@ -126,7 +126,7 @@ const tieneAlerta = tasaAverias > 20;`}
       />
 
       <div className="text-center text-slate-300 text-xs pt-6 border-t border-slate-100 mt-4">
-        Gestor de Obra — Soterramiento A5 · TFG
+        Gestor de Obra — JCGR CIVIL SYSTEMS · TFG
       </div>
     </div>
   );
